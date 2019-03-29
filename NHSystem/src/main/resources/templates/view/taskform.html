@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<div layout:fragment="content" class="container myspace">
+    <div class="alert alert-info" th:if="${exist}">
+        <p class="text text-center">
+            User with this email already exist!!!!
+        </p>
+    </div>
+    <form th:action="@{/addTask}" th:object="${task}" method="post">
+
+        <div class="form-group">
+            <label for="date" class="form-control-label">Date</label>
+            <input type="date" class="form-control" th:field="*{date}" id="date"/>
+            <div class="text text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="starttime" class="form-control-label">Start Time</label>
+            <input type="time" class="form-control" th:field="*{starttime}" id="starttime"/>
+            <div class="text text-danger" th:if="${#fields.hasErrors('starttime')}" th:errors="*{starttime}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="stoptime" class="form-control-label">Stop Time</label>
+            <input type="time" class="form-control" th:field="*{stoptime}" id="stoptime"/>
+            <div class="text text-danger" th:if="${#fields.hasErrors('stoptime')}" th:errors="*{stoptime}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="description" class="form-control-label">Description</label>
+            <textarea class="form-control" th:field="*{description}" id="description"></textarea>
+            <div class="text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        </div>
+        <input type="submit" value="submit" class="btn btn-primary"/>
+
+    </form>
+</div>
+</body>
+</html>
